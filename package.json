@@ -15,9 +15,12 @@
     "todo"
   ],
   "author": "Zak <hi@zak.dev>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zakallen/tudu/issues"
   },
-  "homepage": "https://github.com/zakallen/tudu#readme"
+  "homepage": "https://github.com/zakallen/tudu#readme",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
 }
