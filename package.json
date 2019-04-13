@@ -1,0 +1,23 @@
+{
+  "name": "tudu",
+  "version": "0.0.1",
+  "description": "tudu leverages existing comments in code to help you better manage your project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakallen/tudu.git"
+  },
+  "keywords": [
+    "tudu",
+    "todo"
+  ],
+  "author": "Zak <hi@zak.dev>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zakallen/tudu/issues"
+  },
+  "homepage": "https://github.com/zakallen/tudu#readme"
+}
