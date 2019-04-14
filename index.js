@@ -5,14 +5,15 @@ const { exec } = require('child_process');
 const log = console.log;
 
 // tudu: print them out using chalk in a nice way
+// tudu: test2
 
-exec("grep -rnIF 'tudu:' .", (error, stdout, stderr) => {
+exec("grep -rnI '\(//\|#\) tudu:' .", (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;
   }
-  log(`stdout: ${stdout}`);
-  log(`stderr: ${stderr}`);
+  const arr = stdout.split('\n');
+  for (let x = 1; x < arr.length - 1; x++) {
+    log(`${x}. ${chalk.blue(arr[x])}`);
+  }
 });
-
-log(chalk.blue('Hello') + ' World' + chalk.green('!'));
