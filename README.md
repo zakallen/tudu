@@ -9,3 +9,6 @@ or
 ```
 yarn global add tudu
 ```
+
+### Dependencies
+- [chalk](https://github.com/chalk/chalk)
