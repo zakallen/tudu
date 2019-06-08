@@ -12,58 +12,59 @@ const { performance } = require('perf_hooks');
 
 const t0 = performance.now();
 
-// todo: get yargs working properly
 var argv = require('yargs') // eslint-disable-line
   .usage('Usage: $0 <command> [options]')
-  .command('todo', 'List out todos')
-  .option('verbose', {
-    alias: 'v',
-    default: false,
-  })
+  .command('todo', 'List out only todos')
+  .command('feature', 'List out only features')
+  .command('refactor', 'List out only refactors')
+  .command('bugfix', 'List out only bugfixes')
+  .help('h')
   .argv;
 
-// feature: be able to parse out other keywords
-let keyword = 'todo';
+let keyword = String.raw`\(todo\|feature\|refactor\|bugfix\)`;
 if (argv._.length === 1) {
   [keyword] = argv._;
 }
 
-// refactor: split up execution string builder even more
-const executionStr = String.raw`git grep -n --untracked --full-name "\(//\|#\) ${keyword}:"`;
+const commentStr = String.raw`\(//\|#\)`;
+const executionStr = String.raw`git grep -n --untracked --full-name "${commentStr} ${keyword}:"`;
+
+// for debugging
+log(executionStr);
 
 exec(executionStr, (error, stdout) => {
   if (error) {
     log(chalk.red("🙅‍  No Tudu's found."));
     return;
   }
-  const arr = stdout.split('\n');
-  const outputArr = [
-    ['', 'Title', 'File', 'Line'],
+  const rawArr = stdout.split('\n');
+  const tableArr = [
+    ['', 'Type', 'Title', 'File', 'Line'],
   ];
-  for (let x = 1; x < arr.length; x += 1) {
-    const line = arr[x - 1]
+  for (let x = 1; x < rawArr.length; x += 1) {
+    const line = rawArr[x - 1];
     const [
       path,
       lineNumber,
       commentStart,
       title,
     ] = line.split(':');
-    outputArr.push([
+    const strippedKeyword = commentStart.replace(/ *(\/\/|#) /g, '');
+    tableArr.push([
       `${x}.`,
+      strippedKeyword,
       chalk.blue(title.trim()),
       path,
       lineNumber,
     ]);
   }
-  const output = table(outputArr, {
+  const output = table(tableArr, {
     border: getBorderCharacters('void'),
     columnDefault: {
       paddingLeft: 0,
-      paddingRight: 1
+      paddingRight: 1,
     },
-    drawHorizontalLine: () => {
-      return false;
-    },
+    drawHorizontalLine: () => false,
   });
   // empty line above table
   log('');
