@@ -1,35 +1,35 @@
 #!/usr/bin/env node
 
+// todo: get linting in this project
+// todo: add typescript to this project
+
+const { log } = console;
+
 const { table, getBorderCharacters } = require('table');
 const chalk = require('chalk');
 const { exec } = require('child_process');
 const { performance } = require('perf_hooks');
 
-const { log } = console;
-
-// Tudu: be able to parse out other keywords
-// Tudu: get linting in this project
-// Tudu: add typescript to this project
-
 const t0 = performance.now();
 
-const ignoreDirArr = [
-  'node_modules',
-];
+// todo: get yargs working properly
+var argv = require('yargs') // eslint-disable-line
+  .usage('Usage: $0 <command> [options]')
+  .command('todo', 'List out todos')
+  .option('verbose', {
+    alias: 'v',
+    default: false,
+  })
+  .argv;
 
-// Tudu: make file and directory ignore more robust
-let ignoreDirStr = '';
-if (ignoreDirArr.length > 0) {
-  ignoreDirStr = `--exclude-dir=${ignoreDirArr[0]}`;
+// feature: be able to parse out other keywords
+let keyword = 'todo';
+if (argv._.length === 1) {
+  [keyword] = argv._;
 }
 
-const ignoreFileStr = '';
-
-const ignoreStr = `${ignoreDirStr} ${ignoreFileStr}`;
-
-// Tudu: split up execution string builder even more
-const keyword = String.raw`\(//\|#\) Tudu:`;
-const executionStr = `grep -rnI "${keyword}" . ${ignoreStr}`;
+// refactor: split up execution string builder even more
+const executionStr = String.raw`git grep -n --untracked --full-name "\(//\|#\) ${keyword}:"`;
 
 exec(executionStr, (error, stdout) => {
   if (error) {
