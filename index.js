@@ -55,7 +55,7 @@ exec(executionStr, (error, stdout) => {
       strippedKeyword,
       chalk.blue(title.trim()),
       path,
-      lineNumber,
+      lineNumber
     ]);
   }
   const output = table(tableArr, {
