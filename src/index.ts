@@ -1,16 +1,12 @@
 #!/usr/bin/env node
 
-// todo: get linting in this project
-// todo: add typescript to this project
+const { log, time, timeEnd } = console;
 
-const { log } = console;
+import { table, getBorderCharacters } from 'table';
+import chalk from 'chalk';
+import { exec } from 'child_process';
 
-const { table, getBorderCharacters } = require('table');
-const chalk = require('chalk');
-const { exec } = require('child_process');
-const { performance } = require('perf_hooks');
-
-const t0 = performance.now();
+time('Completed in');
 
 var argv = require('yargs') // eslint-disable-line
   .usage('Usage: $0 <command> [options]')
@@ -32,7 +28,7 @@ const executionStr = String.raw`git grep -n --untracked --full-name "${commentSt
 // for debugging
 log(executionStr);
 
-exec(executionStr, (error, stdout) => {
+exec(executionStr, (error: any, stdout: string): void => {
   if (error) {
     log(chalk.red("🙅‍  No Tudu's found."));
     return;
@@ -58,18 +54,19 @@ exec(executionStr, (error, stdout) => {
       lineNumber,
     ]);
   }
+
   const output = table(tableArr, {
     border: getBorderCharacters('void'),
     columnDefault: {
       paddingLeft: 0,
       paddingRight: 1,
     },
-    drawHorizontalLine: () => false,
+    drawHorizontalLine: (): boolean => false,
   });
+
   // empty line above table
   log('');
   log(output);
 
-  const t1 = performance.now();
-  log(`Completed in ${((t1 - t0) / 1000).toFixed(1)} seconds.`);
+  timeEnd('Completed in');
 });

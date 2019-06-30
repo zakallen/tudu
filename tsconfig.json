@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "strict": true,
+  }
+}
