@@ -24,10 +24,11 @@
   },
   "homepage": "https://github.com/zakallen/tudu#readme",
   "dependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/yargs": "^13.0.2",
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
-    "table": "^5.2.3",
-    "yargs": "^13.2.4"
+    "table": "^5.2.3"
   },
   "bin": {
     "tudu": "./build/index.js"
