@@ -25,6 +25,7 @@
   "homepage": "https://github.com/zakallen/tudu#readme",
   "dependencies": {
     "chalk": "^2.4.2",
+    "commander": "^3.0.0",
     "table": "^5.2.3",
     "yargs": "^13.2.4"
   },

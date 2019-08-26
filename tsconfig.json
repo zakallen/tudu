@@ -1,4 +1,6 @@
 {
+  "compileOnSave": true,
+  "esModuleInterop": true,
   "compilerOptions": {
     "declaration": true,
     "removeComments": true,
