@@ -1,11 +1,17 @@
 const { log } = console;
 
-export default function(): string {
-  // ~Todo: export the comment delimiter
-  const commentStr = String.raw`\(//\|#\|<!--\) ~Todo`;
+export default function(debug: boolean): string {
+  const delimiterArr = [
+    '//',
+    '#',
+    '<!--',
+  ];
+  const delimiters = delimiterArr.join(String.raw`\|`);
+  const commentStr = String.raw`\(${delimiters}\) ~Todo`;
   const executionStr = String.raw`git grep -n --untracked "${commentStr}"`;
 
-  // for debugging
-  // log(executionStr);
+  if (debug) {
+    log(executionStr);
+  }
   return executionStr;
 }
