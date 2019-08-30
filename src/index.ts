@@ -31,8 +31,8 @@ commander
       `sure you're running this on a clean branch and are ready to commit\n` +
       `these changes. Proceed? [Yes/No] `;
     rl.question(question, (answer): void => {
-      log('\n');
-      if (answer === 'Yes' || answer === 'yes') {
+      log();
+      if (['Yes', 'yes', 'Y', 'y'].indexOf(answer) !== -1) {
         log(chalk.greenBright("🤘  Great! Let's begin..."));
         init(commander.debug);
       } else {
