@@ -13,7 +13,7 @@ import renderOutput from './render';
 import init from './init';
 
 commander
-  .version('0.0.1')
+  .version('0.1.0')
   .description('Todo comments on steroids.')
   .option('-d, --debug', 'output extra debugging');
 
