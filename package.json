@@ -1,6 +1,6 @@
 {
   "name": "tudu",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "tudu leverages existing comments in code to help you better manage your project",
   "main": "./build/index.js",
   "files": [
