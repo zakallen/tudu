@@ -35,3 +35,5 @@ Ideas:
 
 - the character before the Todo should be customizable. default is '~'. and then the other keywords could be customizeable as well.
 
+- Maybe I should git grep by different file types. I could then bucket the todos by language?
+

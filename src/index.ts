@@ -11,6 +11,7 @@ import executionStr from './command';
 import processOutput from './process';
 import renderOutput from './render';
 import init from './init';
+import { setDebug, isDebug } from './util/global';
 
 commander
   .version('0.1.1')
@@ -34,7 +35,7 @@ commander
       log();
       if (['Yes', 'yes', 'Y', 'y'].indexOf(answer) !== -1) {
         log(chalk.greenBright("🤘  Great! Let's begin..."));
-        init(commander.debug);
+        init();
       } else {
         log("🙁  Ok, maybe next time...");
       }
@@ -44,13 +45,17 @@ commander
 
 commander.parse(process.argv);
 
-if (commander.debug) {
+setDebug(commander.debug);
+
+if (isDebug()) {
   time('Completed in');
 }
 
 // Only run default tudu code if root command
+
+
 if (commander.args.length <= 0) {
-  exec(executionStr(commander.debug), (error: any, stdout: string): void => {
+  exec(executionStr(), (error: any, stdout: string): void => {
     if (error) {
       log(chalk.red("🙅‍  No Tudu's found."));
       return;
@@ -61,6 +66,6 @@ if (commander.args.length <= 0) {
   });
 }
 
-if (commander.debug) {
+if (isDebug()) {
   timeEnd('Completed in');
 }
