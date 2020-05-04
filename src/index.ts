@@ -52,7 +52,7 @@ if (isDebug()) {
 }
 
 // Only run default tudu code if root command
-
+// TODO: test todo for cosmo
 
 if (commander.args.length <= 0) {
   exec(executionStr(), (error: any, stdout: string): void => {
